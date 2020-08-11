@@ -7,4 +7,6 @@ import com.ecommerce.model.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
+	Product findByProductId(Long productId);
+
 }

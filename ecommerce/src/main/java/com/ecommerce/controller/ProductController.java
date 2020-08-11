@@ -39,7 +39,7 @@ public class ProductController {
 	@PutMapping("/update")
 	private ResponseEntity<Product> updateCategory(@RequestBody Product product) {
 		HttpHeaders header = new HttpHeaders();
-		boolean isProduct = productService.getProductById(product.getProductId());
+		boolean isProduct = productService.isProductById(product.getProductId());
 		if (isProduct) {
 			productService.addProduct(product);
 		}
@@ -57,7 +57,7 @@ public class ProductController {
 
 	@DeleteMapping("/delete/{productId}")
 	private ResponseEntity<Void> deleteById(@PathVariable Long productId) {
-		boolean isProduct = productService.getProductById(productId);
+		boolean isProduct = productService.isProductById(productId);
 		try {
 			if (isProduct) {
 				productService.deleteById(productId);

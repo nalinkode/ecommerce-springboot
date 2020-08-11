@@ -1,5 +1,8 @@
 package com.ecommerce.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -28,19 +32,23 @@ public class Product {
 	@JsonManagedReference
 	private SubCategory subCategory;
 
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	@JsonBackReference
+	private List<ProductImage> productImage;
+
 	public Product() {
-		
+
 	}
 
 	public Product(String productName, Double productPrice, Double productOfferPrice, String productDescription,
-			String productColor, SubCategory subCategory) {
-		super();
+			String productColor, SubCategory subCategory, List<ProductImage> productImage) {
 		this.productName = productName;
 		this.productPrice = productPrice;
 		this.productOfferPrice = productOfferPrice;
 		this.productDescription = productDescription;
 		this.productColor = productColor;
 		this.subCategory = subCategory;
+		this.productImage = productImage;
 	}
 
 	public Long getProductId() {
@@ -98,5 +106,13 @@ public class Product {
 	public void setSubCategory(SubCategory subCategory) {
 		this.subCategory = subCategory;
 	}
-	
+
+	public List<ProductImage> getProductImage() {
+		return productImage;
+	}
+
+	public void setProductImage(List<ProductImage> productImage) {
+		this.productImage = productImage;
+	}
+
 }

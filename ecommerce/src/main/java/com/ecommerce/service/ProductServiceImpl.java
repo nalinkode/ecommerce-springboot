@@ -33,7 +33,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public boolean getProductById(Long productId) {
+	public boolean isProductById(Long productId) {
 		return productRepository.findById(productId) != null;
 	}
 
@@ -45,6 +45,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void deleteById(Long productId) {
 		productRepository.deleteById(productId);
+	}
+
+	@Override
+	public Product getProductById(Long productId) {
+		return productRepository.findByProductId(productId);
 	}
 
 }
